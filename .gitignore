@@ -1,0 +1,4 @@
+/.idea
+/target
+/feign/.gradle
+/feign/build

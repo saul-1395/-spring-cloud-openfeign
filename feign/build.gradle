@@ -1,0 +1,49 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+    id 'io.freefair.lombok' version '5.0.0'
+
+}
+
+group = 'kondratov.spring_feign'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    set('springCloudVersion', 'Hoxton.SR5')
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.boot:spring-boot-starter'//добавил
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' //добавил
+    implementation 'org.springframework.boot:spring-boot-starter-tomcat'//добавил
+    implementation 'org.springframework:spring-test'//Добавил
+
+
+
+
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+test {
+
+    useJUnitPlatform()
+}
