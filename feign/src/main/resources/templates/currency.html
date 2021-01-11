@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kondratov test task</title>
+</head>
+<body>
+<h1>currency exchange rate:</h1>
+
+
+<p>Course to day,    <text th:text="*{attrCurrency}" />: <text th:text="*{attrCoursTD}" /> </p>
+<p>Course yesterday, <text th:text="*{attrCurrency}" />: <text th:text="*{attrCoursYTD}" /> </p>
+</body>
+</html>
