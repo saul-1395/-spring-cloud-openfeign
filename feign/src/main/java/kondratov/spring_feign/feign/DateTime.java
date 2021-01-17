@@ -30,11 +30,11 @@ public class DateTime {
 
     }
 
-    public String getTimeYestoday() {
+    public String getTimeyesterday() {
 
-        long yesturday = System.currentTimeMillis() - 24 * 3600 * 1000;
+        long yesterday = System.currentTimeMillis() - 24 * 3600 * 1000;
 
-        return getTime(yesturday);
+        return getTime(yesterday);
     }
 
     public String getTimeTwoDaysAgo() {

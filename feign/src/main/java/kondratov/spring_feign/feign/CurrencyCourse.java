@@ -22,7 +22,6 @@ public class CurrencyCourse {
     }
 
 
-
     public static String getCoursTD() {
         return coursTD;
     }

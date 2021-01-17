@@ -13,7 +13,7 @@ class PropertyServiceTest {
 
     @Test
     void propperties(){
-        assertEquals("RUB", propertyService.properties().getProperty("val"));
+        assertEquals("RUB", propertyService.properties().getProperty("currency"));
     }
 
 

@@ -4,14 +4,18 @@ package kondratov.spring_feign.feign;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.RestController;
-import static kondratov.spring_feign.feign.PropertyService.*;
-import static kondratov.spring_feign.feign.CurrencyCourse.*;
+
 import java.util.LinkedHashMap;
+
+import static kondratov.spring_feign.feign.CurrencyCourse.setCoursTD;
+import static kondratov.spring_feign.feign.CurrencyCourse.setCouursYTD;
+import static kondratov.spring_feign.feign.PropertyService.properties;
 
 
 enum CourseTime {
     TODAY, YESTERDAY, TWO_DAYS_AGO;
 }
+
 @Configuration                                       //properties
 @PropertySource("classpath:/app.properties")         //properties
 
@@ -21,48 +25,39 @@ enum CourseTime {
 public class APIcash {
 
 
-
     private DateTime dateTime = new DateTime();
     private String type_request;
     private String app_id = properties().getProperty("id_currency");
     private String symbols = properties().getProperty("currency");
     private LinkedHashMap course;
-    private Object response;
     private double currencyCourses;
-   // private String webAdres = "openexchangerates.org";
 
 
-    private double getCourseLocal(CourseTime courseTime, CashCourse cashCourse) {
-
+    private double getCourseLocal(CourseTime courseTime, CourseService courseService) {
 
 
         switch (courseTime) {
             case TODAY:
-
                 type_request = "latest.json";
-
-                response = cashCourse.getData(type_request, app_id, symbols);
-                course = LinkedHashMap.class.cast(response);
-
+                course = (LinkedHashMap) courseService.getData(type_request, app_id, symbols);
                 break;
             case TWO_DAYS_AGO:
-
                 type_request = "historical/" + dateTime.getTimeTwoDaysAgo() + ".json";
-
-                response = cashCourse.getData( type_request, app_id, symbols);
-                course = LinkedHashMap.class.cast(response);
+                course = (LinkedHashMap) courseService.getData(type_request, app_id, symbols);
+              //  System.out.println((double) ((LinkedHashMap) course.get("rates")).get(symbols) + "0000");
                 break;
         }
-
         currencyCourses = (double) ((LinkedHashMap) course.get("rates")).get(symbols);
         return currencyCourses;
     }
 
-    public boolean CourseUP(CashCourse cashCourse) {
+    public boolean CourseUP(CourseService courseService) {
 
-        double toDay = getCourseLocal(CourseTime.TODAY, cashCourse);
+        double toDay = getCourseLocal(CourseTime.TODAY, courseService);
         setCoursTD(Double.toString(toDay));
-        double twoDaysAgo = getCourseLocal(CourseTime.TWO_DAYS_AGO, cashCourse);
+       // System.out.println(toDay + "!!!!!!!!!!!!!");
+        double twoDaysAgo = getCourseLocal(CourseTime.TWO_DAYS_AGO, courseService);
+       // System.out.println(twoDaysAgo + "!!!!!!!!!!!!!");
         setCouursYTD(Double.toString(twoDaysAgo));
 
         if (toDay > twoDaysAgo) {

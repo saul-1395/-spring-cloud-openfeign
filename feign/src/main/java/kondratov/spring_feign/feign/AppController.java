@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.LinkedHashMap;
 
 import static kondratov.spring_feign.feign.PropertyService.properties;
+
 @RestController
 public class AppController {
 
@@ -13,18 +14,20 @@ public class AppController {
     private LinkedHashMap response = new LinkedHashMap();
     private String GIF_URL;
     private String apiKey = properties().getProperty("apiKey");
+    private String rating = properties().getProperty("gif_rating");
 
 
-    public String getData(GIFservice giFservice, CashCourse cashCourse, APIcash apIcash) {
+    public String getData(GIFservice giFservice, CourseService courseService, APIcash apIcash) {
 
-        courseUP = apIcash.CourseUP(cashCourse);
+        courseUP = apIcash.CourseUP(courseService);
         if (courseUP) {
-            tag = "rich";
+            tag = properties().getProperty("gif_tag_rich");
+
         } else {
-            tag = "broke";
+            tag = properties().getProperty("gif_tag_broke");
         }
 
-        response = LinkedHashMap.class.cast(giFservice.getData(apiKey, tag, "g"));
+        response = (LinkedHashMap) (giFservice.getData(apiKey, tag, rating));
         GIF_URL = (String) ((LinkedHashMap) (((LinkedHashMap) (((LinkedHashMap) response.get("data")).get("images"))).get("original"))).get("url");
         System.out.println(
                 GIF_URL

@@ -15,6 +15,7 @@ repositories {
 }
 
 ext {
+
     set('springCloudVersion', 'Hoxton.SR5')
 }
 
@@ -25,16 +26,18 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' //добавил
     implementation 'org.springframework.boot:spring-boot-starter-tomcat'//добавил
     implementation 'org.springframework:spring-test'//Добавил
-
-
-
-
+    testCompile('com.github.tomakehurst:wiremock:2.1.12')//Добавил для ВиремокТест
+    testCompile("org.junit.jupiter:junit-jupiter-params:5.7.0")//параметризованные тесты
+    testCompile("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+    testCompile("org.junit.jupiter:junit-jupiter:5.7.0")
+    testCompile("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+    compile("org.junit.platform:junit-platform-commons:1.7.0")
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 }
-
 
 
 dependencyManagement {

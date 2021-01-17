@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "course-cash", url = "https://openexchangerates.org")
-public interface CashCourse {
+public interface CourseService {
 
 
     @GetMapping("/api/{type_request}")
