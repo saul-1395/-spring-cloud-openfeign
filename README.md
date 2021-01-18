@@ -8,8 +8,9 @@
 
 ##### <li>Технологии: JUnit, Spring Boot 2, Feign
 
-##### <li>web ресурсы: <https://docs.openexchangerates.org/>,
-					   <https://developers.giphy.com/docs/api/#quick-start-guide>
+##### <li>web ресурс Gif: <https://docs.openexchangerates.org/>
+
+##### <li>web ресурс на курсы валют: <https://developers.giphy.com/docs/api/#quick-start-guide>
 					   
 ##### <li>ссылка на проекта на Git: <https://github.com/saul-1395/-spring-cloud-openfeign.git>
 
